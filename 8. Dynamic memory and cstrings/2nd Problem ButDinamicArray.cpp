@@ -32,24 +32,19 @@ void replace(int **matrix, int M, int N)
 }
 void order(int **matrix, int M, int N)
 {
-    int zeroCount = 0;
     for (int i = 0; i < M; ++i) {
+      
+        int zeroIndex = 0;
 
-        for (int j = 0; j < N; ++j) {
-            if (matrix[i][j] == 0)
-                zeroCount++;
-        }
-        
-        int nonZeroIndex = 0;
-        for (int j = 0; j < N; ++j) {
-            if (matrix[i][j] != 0) {
-                matrix[i][nonZeroIndex] = matrix[i][j];
-                nonZeroIndex++;
-            }
-        }
-        for (int j = nonZeroIndex; j < N; ++j)
+        for (int j = 0; j < N; ++j)
         {
-            matrix[i][j] = 0;
+            if (matrix[i][j] == 0)
+            {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[i][zeroIndex];
+                matrix[i][zeroIndex] = temp;
+                zeroIndex++;
+            }
         }
     }
 }
